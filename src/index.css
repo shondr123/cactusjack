@@ -1,0 +1,210 @@
+@import url('https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500;600&family=Oswald:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+/* JACKBOYS (2019) album cover palette */
+@theme {
+  --font-sans: "Oswald", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Anton", sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+
+  /* Ski-mask neon green */
+  --color-neon: #a4ff00;
+  --color-neon-glow: #39ff14;
+
+  /* RX-7 mustard yellow */
+  --color-mustard: #c5b358;
+  --color-mustard-muted: #bdb76b;
+
+  /* Twilight lavender / purple sky */
+  --color-lavender: #a388ad;
+  --color-purple: #7e5a9b;
+
+  /* Hills & night */
+  --color-forest: #0b1204;
+  --color-night: #1a1a1a;
+
+  /* Windshield text & headlights */
+  --color-paper: #ffffff;
+  --color-silver: #a9a9a9;
+
+  /* Motion-shot burnt orange wall */
+  --color-burnt: #9c5a42;
+  --color-flame: #ff4500;
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-forest text-paper overflow-x-hidden;
+    font-family: var(--font-sans);
+  }
+
+  ::selection {
+    background: var(--color-neon);
+    color: var(--color-forest);
+  }
+}
+
+@layer utilities {
+  .grain {
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  .grain::before {
+    content: "";
+    position: fixed;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    background-image: url("https://grainy-gradients.vercel.app/noise.svg");
+    opacity: 0.32;
+    pointer-events: none;
+    z-index: 200;
+    animation: grain-shift 0.5s steps(6) infinite;
+  }
+
+  .vhs-overlay {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 150;
+    background: repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(0, 0, 0, 0.12) 2px,
+      rgba(0, 0, 0, 0.12) 4px
+    );
+    opacity: 0.35;
+  }
+
+  .vhs-chrome {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 149;
+    mix-blend-mode: soft-light;
+    opacity: 0.06;
+    background: linear-gradient(
+      135deg,
+      rgba(163, 136, 173, 0.35) 0%,
+      transparent 40%,
+      transparent 60%,
+      rgba(164, 255, 0, 0.08) 100%
+    );
+  }
+
+  .rec-dot {
+    @apply w-2 h-2 rounded-full bg-neon-glow;
+    box-shadow: 0 0 8px var(--color-neon-glow);
+    animation: rec-blink 1.2s ease-in-out infinite;
+  }
+
+  .text-glow-neon {
+    text-shadow:
+      0 0 30px rgba(164, 255, 0, 0.65),
+      0 0 60px rgba(57, 255, 20, 0.35),
+      0 0 90px rgba(197, 179, 88, 0.2);
+  }
+
+  .text-stroke-neon {
+    -webkit-text-stroke: 1.5px var(--color-neon);
+    color: transparent;
+  }
+
+  .tape-edge {
+    background: linear-gradient(
+      180deg,
+      var(--color-night) 0%,
+      #252525 4%,
+      var(--color-forest) 8%,
+      var(--color-night) 100%
+    );
+  }
+
+  .parental-badge {
+    border: 2px solid var(--color-paper);
+    font-family: var(--font-mono);
+    letter-spacing: 0.15em;
+  }
+
+  .glitch-hover:hover {
+    animation: glitch-skew 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both infinite;
+  }
+
+  .viz-bar {
+    @apply bg-neon;
+    animation: viz-pulse 0.8s ease-in-out infinite alternate;
+  }
+
+  .cover-grade {
+    filter: contrast(1.12) saturate(1.08) brightness(0.92);
+  }
+
+  .photo-grade {
+    filter: contrast(1.08) saturate(1.05) brightness(0.88);
+  }
+
+  /* White cross logo on black — keep strokes crisp on dark UI */
+  .cactus-logo-img {
+    filter: drop-shadow(0 0 18px rgba(164, 255, 0, 0.12));
+  }
+
+  .hero-cover-gradient {
+    background: linear-gradient(
+      180deg,
+      rgba(126, 90, 155, 0.45) 0%,
+      rgba(11, 18, 4, 0.35) 35%,
+      rgba(11, 18, 4, 0.88) 72%,
+      var(--color-forest) 100%
+    );
+  }
+
+  @keyframes grain-shift {
+    0%, 100% { transform: translate(0, 0); }
+    25% { transform: translate(-3%, -2%); }
+    50% { transform: translate(2%, 3%); }
+    75% { transform: translate(-2%, 1%); }
+  }
+
+  @keyframes rec-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.35; }
+  }
+
+  @keyframes viz-pulse {
+    from { transform: scaleY(0.3); }
+    to { transform: scaleY(1); }
+  }
+
+  @keyframes marquee {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .animate-marquee {
+    animation: marquee 35s linear infinite;
+  }
+
+  @keyframes glitch-skew {
+    0% { transform: skew(0deg); }
+    20% { transform: skew(-2deg); }
+    40% { transform: skew(2deg); }
+    60% { transform: skew(-1deg); }
+    80% { transform: skew(1deg); }
+    100% { transform: skew(0deg); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .grain::before,
+    .animate-marquee,
+    .viz-bar,
+    .rec-dot {
+      animation: none;
+    }
+  }
+}

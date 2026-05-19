@@ -1,0 +1,8 @@
+{
+  "name": "CACTUS LABS",
+  "description": "A premium cinematic landing page for Cactus Labs, a futuristic creative universe built beyond music by Travis Scott.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}
