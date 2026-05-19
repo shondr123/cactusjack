@@ -18,11 +18,14 @@ import { useState, useRef, useEffect } from "react";
 import { cn } from "./lib/utils";
 
 const SPOTIFY_ALBUM = "https://open.spotify.com/album/5m3cFmubEJK548Y4WvEMJZ";
-const CACTUS_LOGO = "/cactus-jack-logo.png";
+const CACTUS_LOGO = "/logo.png";
 const ALBUM_COVER = "/jackboys-cover.png";
 const PHOTO_MOTION = "/travis-motion.png";
+const MASK_PHOTO = "/neonmask.png"
+const CAR_PHOTO = "/car.jpg"
+const SICK_PHOTO = "/sick.jpg"
 /** Group flash photo — add as public/jackboys-crew.png to use */
-const PHOTO_CREW = "/jackboys-crew.png";
+const PHOTO_CREW = "/crew.jpg";
 
 type LogoSize = "nav" | "md" | "lg" | "hero";
 
@@ -105,13 +108,13 @@ const TRACKS = [
 ] as const;
 
 const CREW = [
-  { name: "TRAVIS SCOTT", role: "CACTUS JACK" },
-  { name: "SHECK WES", role: "MOB" },
-  { name: "DON TOLIVER", role: "HEAVEN" },
-  { name: "GUNNA", role: "WUNNA" },
-  { name: "POP SMOKE", role: "LEGEND" },
-  { name: "YOUNG THUG", role: "SLIME" },
-  { name: "LIL KEED", role: "SLIME" },
+  { name: "TRAVIS SCOTT", role: "CACTUS JACK", image: "/profPics/travisPFP.webp", },
+  { name: "SHECK WES", role: "MOB", image: "/profPics/sheckPFP.webp", },
+  { name: "DON TOLIVER", role: "HEAVEN", image: "/profPics/donPFP.webp", },
+  { name: "GUNNA", role: "WUNNA", image: "/profPics/gunnaPFP.webp", },
+  { name: "POP SMOKE", role: "LEGEND", image: "/profPics/popPFP.webp", },
+  { name: "YOUNG THUG", role: "SLIME", image: "/profPics/youngPFP.webp", },
+  { name: "LIL KEED", role: "SLIME", image: "/profPics/keedPFP.webp", },
 ] as const;
 
 const ARTIFACTS = [
@@ -127,7 +130,7 @@ const ARTIFACTS = [
     id: "CJ-002",
     title: "SICK OF IT ALL",
     tag: "RAW MOTION",
-    image: PHOTO_MOTION,
+    image: SICK_PHOTO,
     objectPosition: "center",
     span: "md:col-span-1",
   },
@@ -135,7 +138,7 @@ const ARTIFACTS = [
     id: "CJ-003",
     title: "NEON MASKS",
     tag: "THE LOT",
-    image: ALBUM_COVER,
+    image: MASK_PHOTO,
     objectPosition: "center 25%",
     span: "md:col-span-1",
   },
@@ -143,7 +146,7 @@ const ARTIFACTS = [
     id: "CJ-004",
     title: "ASPHALT BURN",
     tag: "STREET UNIT",
-    image: PHOTO_MOTION,
+    image: CAR_PHOTO,
     objectPosition: "center 40%",
     span: "md:col-span-2",
   },
@@ -589,11 +592,20 @@ const CrewSection = () => (
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: i * 0.06 }}
-            className="tape-edge border border-paper/10 p-5 md:p-6 hover:border-neon/40 transition-colors group"
+            className="tape-edge border border-paper/10 p-3 md:p-4 hover:border-neon/40 transition-colors group overflow-hidden"
           >
+            <div className="aspect-square w-full mb-4 overflow-hidden border border-paper/10">
+              <img
+                src={member.image}
+                alt={member.name}
+                className="w-full h-full object-cover grayscale group-hover:grayscale-0 group-hover:scale-105 transition-all duration-500"
+              />
+            </div>
+
             <span className="font-mono text-[7px] text-mustard tracking-[0.3em] block mb-3">
               {member.role}
             </span>
+
             <p className="font-display text-sm md:text-base uppercase leading-tight group-hover:text-neon transition-colors">
               {member.name}
             </p>
@@ -654,25 +666,31 @@ const Artifacts = () => (
     </div>
   </section>
 );
+const Marquee = () => {
+  const text = "GANG GANG · OUT WEST · HIGHEST IN THE ROOM · GATTI ·";
 
-const Marquee = () => (
-  <section className="py-16 bg-neon text-forest overflow-hidden border-y-4 border-forest">
-    <div className="flex animate-marquee whitespace-nowrap">
-      {[0, 1].map((set) => (
-        <div key={set} className="flex shrink-0">
-          {Array.from({ length: 4 }).map((_, i) => (
-            <span
-              key={`${set}-${i}`}
-              className="font-display text-5xl md:text-7xl uppercase px-12 tracking-tight"
-            >
-              GANG GANG · OUT WEST · HIGHEST IN THE ROOM · GATTI ·
-            </span>
-          ))}
+  const content = Array.from({ length: 10 }).map((_, i) => (
+    <span
+      key={i}
+      className="font-display text-5xl md:text-7xl uppercase px-12 tracking-tight"
+    >
+      {text}
+    </span>
+  ));
+
+  return (
+    <section className="py-16 bg-neon text-forest overflow-hidden border-y-4 border-forest">
+      <div className="marquee">
+        <div className="marquee-track">
+          <div className="marquee-content">{content}</div>
+          <div className="marquee-content" aria-hidden="true">
+            {content}
+          </div>
         </div>
-      ))}
-    </div>
-  </section>
-);
+      </div>
+    </section>
+  );
+};
 
 const Stats = () => {
   const stats = [

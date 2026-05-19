@@ -181,15 +181,34 @@
     to { transform: scaleY(1); }
   }
 
+  .marquee {
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .marquee-track {
+    display: flex;
+    width: fit-content;
+    will-change: transform;
+    animation: marquee 20s linear infinite;
+  }
+  
+  .marquee-content {
+    display: flex;
+    flex-shrink: 0;
+    min-width: 100vw;
+    white-space: nowrap;
+  }
+  
   @keyframes marquee {
-    0% { transform: translateX(0); }
-    100% { transform: translateX(-50%); }
+    from {
+      transform: translate3d(0, 0, 0);
+    }
+  
+    to {
+      transform: translate3d(-100vw, 0, 0);
+    }
   }
-
-  .animate-marquee {
-    animation: marquee 35s linear infinite;
-  }
-
   @keyframes glitch-skew {
     0% { transform: skew(0deg); }
     20% { transform: skew(-2deg); }
