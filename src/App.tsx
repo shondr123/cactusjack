@@ -881,6 +881,9 @@ const FooterCTA = () => (
           <a href="#" className="hover:text-neon transition-colors">
             Contact
           </a>
+          <a href="https://www.shondevs.com" className="hover:text-neon transition-colors">
+            Built by Shon Devs
+          </a>
         </div>
         <p className="font-mono text-[8px] text-mustard tracking-widest uppercase">
           Fan tribute · Not affiliated
