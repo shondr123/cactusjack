@@ -61,49 +61,62 @@ const CactusLogo = ({
     </span>
   );
 };
-
 const TRACKS = [
   {
     n: "01",
     title: "HIGHEST IN THE ROOM",
     feat: "Travis Scott",
-    url: "https://open.spotify.com/track/0pDTaUbMDyBqWWWVssHIBx",
+    url: "https://open.spotify.com/track/7h0d2h0fUmzbs7zeFigJPn",
+    embed:
+      "https://open.spotify.com/embed/track/7h0d2h0fUmzbs7zeFigJPn?utm_source=generator",
   },
   {
     n: "02",
     title: "JACKBOYS",
-    feat: "Gunna, Sheck Wes, Don Toliver, Lil Keed & Travis Scott",
-    url: "https://open.spotify.com/track/4BHSjbYylfOH5WAGusDyny",
+    feat: "JACKBOYS",
+    url: "https://open.spotify.com/track/62zKJrpbLxz6InR3tGyr7o",
+    embed:
+      "https://open.spotify.com/embed/track/62zKJrpbLxz6InR3tGyr7o?utm_source=generator",
   },
   {
     n: "03",
     title: "GANG GANG",
-    feat: "Sheck Wes, Don Toliver, Luxury Tax 50 & Travis Scott",
-    url: "https://open.spotify.com/track/2wOXxtHZkV3pZOWXmDFjZ3",
+    feat: "JACKBOYS, Sheck Wes, Don Toliver, Luxury Tax 50 & Travis Scott",
+    url: "https://open.spotify.com/track/6uJONCdr2rC65BNmCnTBWK",
+    embed:
+      "https://open.spotify.com/embed/track/6uJONCdr2rC65BNmCnTBWK?utm_source=generator",
   },
   {
     n: "04",
     title: "HAD ENOUGH",
     feat: "Don Toliver feat. Quavo & Offset",
-    url: "https://open.spotify.com/track/6g6W3pMAFbp2FS2sqTYwhQ",
+    url: "https://open.spotify.com/track/7LGWmZaoS7jZJ5tEi9EcDi",
+    embed:
+      "https://open.spotify.com/embed/track/7LGWmZaoS7jZJ5tEi9EcDi?utm_source=generator",
   },
   {
     n: "05",
     title: "OUT WEST",
     feat: "JACKBOYS & Young Thug",
-    url: "https://open.spotify.com/track/4MoB6YrseVF9gXQa6afOf8",
+    url: "https://open.spotify.com/track/6gi6y1xwmVszDWkUqab1qw",
+    embed:
+      "https://open.spotify.com/embed/track/6gi6y1xwmVszDWkUqab1qw?utm_source=generator",
   },
   {
     n: "06",
     title: "WHAT TO DO?",
-    feat: "Don Toliver",
-    url: "https://open.spotify.com/track/4MoB6YrseVF9gXQa6afOf8",
+    feat: "JACKBOYS & Don Toliver",
+    url: "https://open.spotify.com/track/4AO1XhrgJczQ9bNVxdfKQe",
+    embed:
+      "https://open.spotify.com/embed/track/4AO1XhrgJczQ9bNVxdfKQe?utm_source=generator",
   },
   {
     n: "07",
     title: "GATTI",
-    feat: "Pop Smoke, Travis Scott, Dababy & Rosalía",
-    url: "https://open.spotify.com/track/2wOXxtHZkV3pZOWXmDFjZ3",
+    feat: "JACKBOYS, Pop Smoke & Travis Scott",
+    url: "https://open.spotify.com/track/40mjsnRjCpycdUw3xhS20g",
+    embed:
+      "https://open.spotify.com/embed/track/40mjsnRjCpycdUw3xhS20g?utm_source=generator",
   },
 ] as const;
 
@@ -475,82 +488,145 @@ const LotSection = () => (
   </section>
 );
 
-const Tracklist = () => (
-  <section id="tracklist" className="py-32 md:py-40 px-6 md:px-12 bg-night relative overflow-hidden">
-    <div className="absolute inset-0 opacity-[0.04] pointer-events-none font-display text-[30vw] leading-none text-lavender select-none overflow-hidden whitespace-nowrap top-20">
-      GANG GANG OUT WEST GATTI
-    </div>
+const Tracklist = () => {
+  const [activeTrack, setActiveTrack] = useState<string | null>(null);
 
-    <div className="max-w-5xl mx-auto relative z-10">
-      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-8 border-b border-paper/10">
-        <div>
-          <span className="font-mono text-[9px] text-neon tracking-[0.4em] uppercase">
-            Side A — Compilation
-          </span>
-          <h2 className="font-display text-6xl md:text-8xl uppercase mt-2 tracking-tight">
-            Tracklist
-          </h2>
-        </div>
-        <div className="font-mono text-[9px] text-paper/35 uppercase tracking-widest text-right">
-          <p>7 tracks</p>
-          <p className="text-mustard mt-1">JACKBOYS · 2019</p>
-        </div>
+  return (
+    <section
+      id="tracklist"
+      className="py-32 md:py-40 px-6 md:px-12 bg-night relative overflow-hidden"
+    >
+      <div className="absolute inset-0 opacity-[0.04] pointer-events-none font-display text-[30vw] leading-none text-lavender select-none overflow-hidden whitespace-nowrap top-20">
+        GANG GANG OUT WEST GATTI
       </div>
 
-      <ol className="space-y-1">
-        {TRACKS.map((track, idx) => (
-          <motion.li
-            key={track.n}
-            initial={{ opacity: 0, x: -12 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: idx * 0.05 }}
+      <div className="max-w-5xl mx-auto relative z-10">
+        <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-16 pb-8 border-b border-paper/10">
+          <div>
+            <span className="font-mono text-[9px] text-neon tracking-[0.4em] uppercase">
+              Side A — Compilation
+            </span>
+
+            <h2 className="font-display text-6xl md:text-8xl uppercase mt-2 tracking-tight">
+              Tracklist
+            </h2>
+          </div>
+
+          <div className="font-mono text-[9px] text-paper/35 uppercase tracking-widest text-right">
+            <p>7 tracks</p>
+            <p className="text-mustard mt-1">JACKBOYS · 2019</p>
+          </div>
+        </div>
+
+        <ol className="space-y-3">
+          {TRACKS.map((track, idx) => {
+            const isActive = activeTrack === track.n;
+
+            return (
+              <motion.li
+                key={track.n}
+                initial={{ opacity: 0, x: -12 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: idx * 0.05 }}
+                className={`border transition-all duration-300 ${
+                  isActive
+                    ? "border-neon/35 bg-neon/5"
+                    : "border-transparent hover:border-neon/25 hover:bg-neon/5"
+                }`}
+              >
+                <div className="flex flex-col md:flex-row md:items-center gap-4 md:gap-0 justify-between py-6 px-4 md:px-6">
+                  <div className="flex items-start md:items-center gap-6 md:gap-10 min-w-0">
+                    <span
+                      className={`font-mono text-sm shrink-0 transition-colors ${
+                        isActive ? "text-neon" : "text-mustard"
+                      }`}
+                    >
+                      {track.n}
+                    </span>
+
+                    <div className="min-w-0">
+                      <h3
+                        className={`font-display text-2xl md:text-3xl uppercase tracking-tight truncate md:whitespace-normal transition-colors ${
+                          isActive ? "text-neon" : "text-paper"
+                        }`}
+                      >
+                        {track.title}
+                      </h3>
+
+                      <p className="font-mono text-[9px] text-paper/40 mt-1 uppercase tracking-wide">
+                        {track.feat}
+                      </p>
+                    </div>
+                  </div>
+
+                  <div className="flex items-center gap-4 shrink-0 md:ml-4">
+                    <a
+                      href={track.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hidden md:block font-mono text-[8px] text-paper/20 hover:text-neon/70 tracking-widest uppercase transition-colors"
+                    >
+                      Spotify →
+                    </a>
+
+                    <button
+                      type="button"
+                      onClick={() => setActiveTrack(isActive ? null : track.n)}
+                      className={`w-11 h-11 border flex items-center justify-center transition-all ${
+                        isActive
+                          ? "border-neon bg-neon text-black"
+                          : "border-paper/15 text-paper hover:border-neon hover:bg-neon hover:text-black"
+                      }`}
+                      aria-label={`Play ${track.title}`}
+                    >
+                      <Play size={16} fill="currentColor" />
+                    </button>
+                  </div>
+                </div>
+
+                {isActive && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.25 }}
+                    className="px-4 md:px-6 pb-6"
+                  >
+                    <div className="rounded-xl border border-neon/20 bg-forest/70 p-2 shadow-[0_0_35px_rgba(164,255,0,0.08)]">
+                      <iframe
+                        data-testid="embed-iframe"
+                        style={{ borderRadius: "12px" }}
+                        src={track.embed}
+                        width="100%"
+                        height="152"
+                        frameBorder="0"
+                        allowFullScreen
+                        allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+                        loading="lazy"
+                        className="block"
+                      />
+                    </div>
+                  </motion.div>
+                )}
+              </motion.li>
+            );
+          })}
+        </ol>
+
+        <div className="mt-16 text-center">
+          <a
+            href={SPOTIFY_ALBUM}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 border-2 border-neon text-neon px-10 py-4 font-display text-lg tracking-wide hover:bg-neon hover:text-black transition-all"
           >
-            <a
-              href={track.url}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group flex flex-col md:flex-row md:items-center gap-4 md:gap-0 justify-between py-6 px-4 md:px-6 border border-transparent hover:border-neon/25 hover:bg-neon/5 transition-all duration-300"
-            >
-              <div className="flex items-start md:items-center gap-6 md:gap-10 min-w-0">
-                <span className="font-mono text-sm text-mustard group-hover:text-neon transition-colors shrink-0">
-                  {track.n}
-                </span>
-                <div className="min-w-0">
-                  <h3 className="font-display text-2xl md:text-3xl uppercase tracking-tight group-hover:text-neon transition-colors truncate md:whitespace-normal">
-                    {track.title}
-                  </h3>
-                  <p className="font-mono text-[9px] text-paper/40 mt-1 uppercase tracking-wide">
-                    {track.feat}
-                  </p>
-                </div>
-              </div>
-              <motion.div className="flex items-center gap-4 shrink-0 md:ml-4">
-                <span className="hidden md:block font-mono text-[8px] text-paper/20 group-hover:text-neon/50 tracking-widest uppercase">
-                  Spotify →
-                </span>
-                <div className="w-11 h-11 border border-paper/15 flex items-center justify-center group-hover:border-neon group-hover:bg-neon group-hover:text-black transition-all">
-                  <Play size={16} fill="currentColor" />
-                </div>
-              </motion.div>
-            </a>
-          </motion.li>
-        ))}
-      </ol>
-
-      <div className="mt-16 text-center">
-        <a
-          href={SPOTIFY_ALBUM}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center gap-3 border-2 border-neon text-neon px-10 py-4 font-display text-lg tracking-wide hover:bg-neon hover:text-black transition-all"
-        >
-          OPEN ON SPOTIFY <ExternalLink size={18} />
-        </a>
+            OPEN ON SPOTIFY <ExternalLink size={18} />
+          </a>
+        </div>
       </div>
-    </div>
-  </section>
-);
+    </section>
+  );
+};
 
 const CrewSection = () => (
   <section id="the-crew" className="py-32 px-6 md:px-12 bg-forest border-y border-paper/5">
